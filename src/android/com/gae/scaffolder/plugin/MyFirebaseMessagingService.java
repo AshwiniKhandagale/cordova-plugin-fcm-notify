@@ -63,8 +63,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         
         Log.d(TAG, "\tNotification Data: " + data.toString());
         //FCMPlugin.sendPushPayload( data );
-         sendNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody(), remoteMessage.getData());
-    }
+         sendNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody() }
     // [END receive_message]
 
     /**
@@ -72,20 +71,20 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      *
      * @param messageBody FCM message body received.
      */
-    private void sendNotification(String title, String messageBody, Map<String, Object> data) {
+    private void sendNotification(String title, String messageBody) {
         Intent intent = new Intent(this, FCMPluginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        for (String key : data.keySet()) {
-            intent.putExtra(key, data.get(key).toString());
-        }
+        // for (String key : data.keySet()) {
+        //     intent.putExtra(key, data.get(key).toString());
+        // }
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(getApplicationInfo().icon)
-                .setContentTitle("dsfsdf")
-                .setContentText("fsdfsdfsdfsdsd")
+                .setContentTitle("cas")
+                .setContentText("ASFd")
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
