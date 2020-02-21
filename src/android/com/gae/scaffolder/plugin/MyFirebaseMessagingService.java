@@ -63,7 +63,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         
         Log.d(TAG, "\tNotification Data: " + data.toString());
         //FCMPlugin.sendPushPayload( data );
-         sendNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody() )
+         sendNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
     // [END receive_message]
 
     /**
@@ -71,7 +71,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      *
      * @param messageBody FCM message body received.
      */
-    private void sendNotification(String title, String messageBody) {
+    public void sendNotification(String title, String messageBody) {
         Intent intent = new Intent(this, FCMPluginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         // for (String key : data.keySet()) {
@@ -106,4 +106,4 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 assert notificationManager != null;
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
-}
+
