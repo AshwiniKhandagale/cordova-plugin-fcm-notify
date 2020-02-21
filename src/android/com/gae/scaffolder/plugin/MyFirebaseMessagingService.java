@@ -1,6 +1,7 @@
 package com.gae.scaffolder.plugin;
 
 import android.app.NotificationManager;
+import android.app.NotificationChannel;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -61,8 +62,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
         
         Log.d(TAG, "\tNotification Data: " + data.toString());
-        FCMPlugin.sendPushPayload( data );
-        //sendNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody(), remoteMessage.getData());
+        //FCMPlugin.sendPushPayload( data );
+         sendNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody(), remoteMessage.getData());
     }
     // [END receive_message]
 
@@ -91,7 +92,19 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
+{
+    int importance = NotificationManager.IMPORTANCE_HIGH;
+    NotificationChannel notificationChannel = new NotificationChannel("101", "VirGo", importance);
+    notificationChannel.enableLights(true);
+ 
+    notificationChannel.enableVibration(true);
+    notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+    assert notificationManager != null;
+    notificationBuilder.setChannelId("101");
+    notificationManager.createNotificationChannel(notificationChannel);
+}
+assert notificationManager != null;
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
 }
