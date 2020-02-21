@@ -36,7 +36,7 @@ public class FCMPluginActivity extends Activity {
             }
         }
 		
-		//FCMPlugin.sendPushPayload(data);
+		FCMPlugin.sendPushPayload(data);
 
         finish();
 
