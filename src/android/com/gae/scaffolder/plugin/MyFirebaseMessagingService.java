@@ -65,7 +65,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         //FCMPlugin.sendPushPayload( data );
          sendNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
     // [END receive_message]
-
+    }
     /**
      * Create and show a simple notification containing the received FCM message.
      *
@@ -81,8 +81,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(getApplicationInfo().icon)
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
+                notificationBuilder.setSmallIcon(getApplicationInfo().icon)
                 .setContentTitle("cas")
                 .setContentText("ASFd")
                 .setAutoCancel(true)
@@ -92,18 +92,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
-{
-    int importance = NotificationManager.IMPORTANCE_HIGH;
-    NotificationChannel notificationChannel = new NotificationChannel("101", "VirGo", importance);
-    notificationChannel.enableLights(true);
+         {
+             int importance = NotificationManager.IMPORTANCE_HIGH;
+              NotificationChannel notificationChannel = new NotificationChannel("101", "VirGo", importance);
+            notificationChannel.enableLights(true);
  
-    notificationChannel.enableVibration(true);
-    notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
-    assert notificationManager != null;
-    notificationBuilder.setChannelId("101");
-    notificationManager.createNotificationChannel(notificationChannel);
-}
-assert notificationManager != null;
+             notificationChannel.enableVibration(true);
+            notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+            assert notificationManager != null;
+              notificationBuilder.setChannelId("101");
+               notificationManager.createNotificationChannel(notificationChannel);
+             }
+        assert notificationManager != null;
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
-
+    }
