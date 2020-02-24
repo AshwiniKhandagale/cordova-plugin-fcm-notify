@@ -63,7 +63,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         
         Log.d(TAG, "\tNotification Data: " + data.toString());
          // FCMPlugin.sendPushPayload( data );
-         sendNotification(remoteMessage.getData().getTitle(), remoteMessage.getData().getBody());
+         sendNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("body"));
     // [END receive_message]
     }
     /**
@@ -83,8 +83,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
                 notificationBuilder.setSmallIcon(getApplicationInfo().icon)
-                .setContentTitle("cas")
-                .setContentText("ASFd")
+                .setContentTitle(title)
+                .setContentText(messageBody)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
